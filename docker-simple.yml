@@ -6,4 +6,8 @@ resources:
     type: DockerInc::Docker::Container
     properties:
       image: nginx
-      docker_endpoint: 'tcp://192.168.1.207:2345'
+      docker_endpoint: 'tcp://172.16.6.18:2375'
+      port_specs:
+        - 80
+      port_bindings:
+        80: 80
