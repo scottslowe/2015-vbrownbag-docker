@@ -8,3 +8,6 @@ TimeoutStartSec=0
 ExecStartPre=/usr/bin/docker pull nginx
 ExecStart=/usr/bin/docker run --rm --name nginx-03 -p 80:80 nginx
 ExecStop=/usr/bin/docker stop nginx-03
+
+[X-Fleet]
+Conflicts=nginx-*.service
