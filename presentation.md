@@ -82,7 +82,7 @@ ExecStop=/usr/bin/docker stop sa-nginx
 * Uses systemd unit files to deploy containers onto the cluster
 
 ---
-# **Sample systemd unit file for fleet
+# **Sample systemd unit file for fleet**
 
 ```
 [Unit]
