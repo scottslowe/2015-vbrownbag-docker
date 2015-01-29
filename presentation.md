@@ -107,6 +107,25 @@ Conflicts=nginx-*.service
 # [fit] **Q&A**
 
 ---
+# **More resources: OpenStack Heat**
+
+* An Introduction to OpenStack Heat - [http://blog.scottlowe.org/2014/05/01/an-introduction-to-openstack-heat/](http://blog.scottlowe.org/2014/05/01/an-introduction-to-openstack-heat/)
+* Another Look at an OpenStack Heat Template - [http://blog.scottlowe.org/2014/05/02/another-look-at-an-openstack-heat-template/](http://blog.scottlowe.org/2014/05/02/another-look-at-an-openstack-heat-template/)
+* Deploying CoreOS on OpenStack Using Heat - [http://blog.scottlowe.org/2014/08/13/deploying-coreos-on-openstack-using-heat/](http://blog.scottlowe.org/2014/08/13/deploying-coreos-on-openstack-using-heat/)
+
+---
+# **More resources: CoreOS, etcd, Fleet**
+
+* CoreOS Continued: etcd - [http://blog.scottlowe.org/2014/08/18/coreos-continued-etcd/](http://blog.scottlowe.org/2014/08/18/coreos-continued-etcd/)
+* CoreOS Continued: Fleet and Docker - [http://blog.scottlowe.org/2014/08/20/coreos-continued-fleet-and-docker/](http://blog.scottlowe.org/2014/08/20/coreos-continued-fleet-and-docker/)
+
+---
+# **More resources: Heat+Docker**
+
+* Installing the Docker Plugin for Heat - [http://blog.scottlowe.org/2014/07/31/installing-the-docker-plugin-for-heat/](http://blog.scottlowe.org/2014/07/31/installing-the-docker-plugin-for-heat/)
+* A Heat Template for Docker Containers - [http://blog.scottlowe.org/2014/08/22/a-heat-template-for-docker-containers/](http://blog.scottlowe.org/2014/08/22/a-heat-template-for-docker-containers/)
+
+---
 # **Thank you!**
 
 Blog: [http://blog.scottlowe.org](http://blog.scottlowe.org)
