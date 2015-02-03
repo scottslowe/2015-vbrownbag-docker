@@ -1,0 +1,17 @@
+---
+- name: coreos-01
+  box: coreos-stable
+  ram: 512
+  vcpu: 1
+- name: coreos-02
+  box: coreos-stable
+  ram: 512
+  vcpu: 1
+- name: coreos-03
+  box: coreos-stable
+  ram: 512
+  vcpu: 1
+- name: jumpbox
+  box: slowe/ubuntu-trusty-x64
+  ram: 512
+  vcpu: 1

@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Specify Vagrant version and Vagrant API version
+Vagrant.require_version ">= 1.6.0"
+VAGRANTFILE_API_VERSION = "2"
+
+# Require 'yaml' and 'fileutils' modules
+require 'yaml'
+require 'fileutils'
+
+# Read YAML file with box details
+servers = YAML.load_file('servers.yml')
+
+# Create and configure the VMs
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # Iterate through entries in YAML file
+  servers.each.do |servers|
+    config.vm.define servers["name"] do |srv|
+      srv.vm.hostname = servers["name"]
+      srv.vm.box = servers["box"]
+      srv.vm.provider :vmware_fusion do |vmw|
+        vmw.vmx["memsize"] = servers["ram"]
+        vmw.vmx["numvcpus"] = servers["vcpu"]
+      end
+    end
+  end
+end
