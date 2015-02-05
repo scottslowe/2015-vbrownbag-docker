@@ -14,4 +14,4 @@ These files are intended to allow users to use Vagrant to quickly spin up a clus
 
 ## Instructions
 
-1. 
+1. Use 'vagrant box add' to 

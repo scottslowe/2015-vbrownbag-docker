@@ -3,15 +3,17 @@
   box: coreos-stable
   ram: 512
   vcpu: 1
+  priv_ip: 192.168.254.101
+  pub_ip: 172.16.5.11
 - name: coreos-02
   box: coreos-stable
   ram: 512
   vcpu: 1
+  priv_ip: 192.168.254.102
+  pub_ip: 172.16.5.12
 - name: coreos-03
   box: coreos-stable
   ram: 512
   vcpu: 1
-- name: jumpbox
-  box: slowe/ubuntu-trusty-x64
-  ram: 512
-  vcpu: 1
+  priv_ip: 192.168.254.103
+  pub_ip: 172.16.5.13

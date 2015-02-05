@@ -9,17 +9,31 @@ VAGRANTFILE_API_VERSION = "2"
 require 'yaml'
 require 'fileutils'
 
+# Look for user-data file to configure/customize CoreOS boxes
+USER_DATA = File.join(File.dirname(__FILE__), "user-data")
+
 # Read YAML file with box details
 servers = YAML.load_file('servers.yml')
 
 # Create and configure the VMs
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Iterate through entries in YAML file
-  servers.each.do |servers|
+  # Always use Vagrant's default insecure key
+  config.ssh.insert_key = false
+
+  # Iterate through entries in YAML file to create VMs
+  servers.each do |servers|
     config.vm.define servers["name"] do |srv|
+      srv.vm.box_check_update = false
       srv.vm.hostname = servers["name"]
       srv.vm.box = servers["box"]
+      srv.vm.network "private_network", ip: servers["priv_ip"]
+      srv.vm.network "public_network", bridge: "vlan0", ip: servers["pub_ip"]
+      if srv.vm.box == "coreos-stable"
+        srv.vm.provision :file, :source => "#{USER_DATA}", :destination => "/tmp/vagrantfile-user-data"
+        srv.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
+        srv.vm.synced_folder ".", "/vagrant", disabled: true
+      end
       srv.vm.provider :vmware_fusion do |vmw|
         vmw.vmx["memsize"] = servers["ram"]
         vmw.vmx["numvcpus"] = servers["vcpu"]
