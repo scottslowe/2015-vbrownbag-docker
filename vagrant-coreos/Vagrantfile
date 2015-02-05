@@ -10,9 +10,11 @@ require 'yaml'
 require 'fileutils'
 
 # Look for user-data file to configure/customize CoreOS boxes
+# Be sure to edit user-data file to provide etcd discovery URL
 USER_DATA = File.join(File.dirname(__FILE__), "user-data")
 
-# Read YAML file with box details
+# Read YAML file with VM details (box, CPU, RAM, IP addresses)
+# Be sure to edit servers.yml to provide correct IP addresses
 servers = YAML.load_file('servers.yml')
 
 # Create and configure the VMs
@@ -24,16 +26,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Iterate through entries in YAML file to create VMs
   servers.each do |servers|
     config.vm.define servers["name"] do |srv|
+      # Don't check for box updates
       srv.vm.box_check_update = false
       srv.vm.hostname = servers["name"]
       srv.vm.box = servers["box"]
+      # Assign an additional static private and public network
+      # These networks are required for use with coreos-cloudinit
       srv.vm.network "private_network", ip: servers["priv_ip"]
       srv.vm.network "public_network", bridge: "vlan0", ip: servers["pub_ip"]
+      # For CoreOS boxes, configure etcd, fleet, and Docker via user-data
       if srv.vm.box == "coreos-stable"
         srv.vm.provision :file, :source => "#{USER_DATA}", :destination => "/tmp/vagrantfile-user-data"
         srv.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
+        # Disable default synced folder since CoreOS doesn't have
+        # guest tools (VMware Tools) installed
         srv.vm.synced_folder ".", "/vagrant", disabled: true
       end
+      # Configure VMs with RAM and CPUs per settings in servers.yml
       srv.vm.provider :vmware_fusion do |vmw|
         vmw.vmx["memsize"] = servers["ram"]
         vmw.vmx["numvcpus"] = servers["vcpu"]

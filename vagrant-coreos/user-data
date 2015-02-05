@@ -3,7 +3,7 @@
 coreos:
   etcd:
     # Each unique cluster needs a new token from https://discovery.etcd.io/new
-    discovery: https://discovery.etcd.io/f90c7adc56d8f5a2792641601039caeb
+    discovery: https://discovery.etcd.io/<token>
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
   fleet:
